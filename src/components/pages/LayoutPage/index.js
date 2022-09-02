@@ -3,72 +3,65 @@ import { connect } from "react-redux";
 import { Route, Switch } from "react-router-dom";
 import { actionCategoryByName } from "../../../actions/actionCategoryByName";
 import { actionPageStart } from "../../../actions/actionPageStart";
+import { actionProductById } from "../../../actions/actionProductById";
 import { CartPage } from "../CartPage";
 import { CCategoryPage } from "../CategoryPage";
-import { ProductPage } from "../ProductPage";
+import { CProductPage, ProductPage } from "../ProductPage";
 import { Content } from "./Content";
 import { Footer } from "./Footer";
 import { Header } from "./Header";
 
-// class CategoryPageContainer extends Component {
-//     fetchCategory = () => {
-//         const { onLoad = null, match: { params: { name = "" } = {} } = {} } =
-//             this.props || {};
-//         onLoad && onLoad(name);
-//     };
-
-//     componentDidMount() {
-//         console.log("mount");
-//         this.fetchCategory();
-//     }
-
-//     componentDidUpdate(prevProps) {
-//         if (this.props.match?.params?.name !== prevProps?.match?.params?.name) {
-//             console.log("update");
-//             this.fetchCategory();
-//         }
-//     }
-
-//     render() {
-//         return <CCategoryPage />;
-//     }
-// }
-
-const CategoryPageContainer = ({
-    match: {
-        params: { name },
-    },
-    onLoad,
-}) => {
-    useEffect(() => {
-        console.log(name);
+class CategoryPageContainer extends Component {
+    fetchCategory = () => {
+        const { onLoad = null, match: { params: { name = "" } = {} } = {} } =
+            this.props || {};
         onLoad && onLoad(name);
-    }, [name]);
+    };
 
-    return <CCategoryPage />;
-};
+    componentDidMount() {
+        this.fetchCategory();
+    }
 
-const Test = ({
-    match: {
-        params: { text },
-    },
-}) => {
-    useEffect(() => {
-        console.log(text);
-    });
-    return <div>{text}</div>;
-};
+    componentDidUpdate(prevProps) {
+        if (this.props.match?.params?.name !== prevProps?.match?.params?.name) {
+            this.fetchCategory();
+        }
+    }
+
+    render() {
+        return <CCategoryPage />;
+    }
+}
 
 const CCategoryPageContainer = connect(null, {
     onLoad: (name) => actionCategoryByName({ name }),
 })(CategoryPageContainer);
 
 class ProductPageContainer extends Component {
+    fetchProduct = () => {
+        const { onLoad = null, match: { params: { id = "" } = {} } = {} } =
+            this.props || {};
+        onLoad && onLoad(id);
+    };
+
+    componentDidMount() {
+        this.fetchProduct();
+    }
+
+    componentDidUpdate(prevProps) {
+        if (this.props.match?.params?.id !== prevProps?.match?.params?.id) {
+            this.fetchProduct();
+        }
+    }
+
     render() {
-        const { match = {} } = this.props || {};
-        return <ProductPage product={{ name: match?.params?.name || null }} />;
+        return <CProductPage />;
     }
 }
+
+const CProductPageContainer = connect(null, {
+    onLoad: (id) => actionProductById({ id }),
+})(ProductPageContainer);
 
 class LayoutPage extends Component {
     componentDidMount() {
@@ -87,11 +80,10 @@ class LayoutPage extends Component {
                             exact
                         />
                         <Route
-                            path="/product/:name"
-                            component={ProductPageContainer}
+                            path="/product/:id"
+                            component={CProductPageContainer}
                         />
                         <Route path="/cart" component={CartPage} />
-                        <Route path="/test/:text" component={Test} />
                     </Switch>
                 </Content>
                 <Footer />

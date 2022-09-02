@@ -1,5 +1,5 @@
 import { Component } from "react";
-import { connect } from "react-redux";
+import { connect, Provider } from "react-redux";
 import { Link, withRouter } from "react-router-dom";
 import { actionCartAdd } from "../../reducers";
 import { CartAddIcon } from "./CartAddIcon";
@@ -22,9 +22,7 @@ export class ProductCard extends Component {
                 className="ProductCard"
                 onMouseEnter={() => this.setIsHover(true)}
                 onMouseLeave={() => this.setIsHover(false)}
-                onClick={() =>
-                    product?.inStock && history.push(`/product/${product?.id}`)
-                }
+                onClick={() => history.push(`/product/${product?.id}`)}
             >
                 <div className="card-img">
                     {<img src={product?.gallery[0]} />}
@@ -41,7 +39,14 @@ export class ProductCard extends Component {
                         ) : (
                             <CartAddIcon
                                 isActive={this.state.isHover}
-                                onClick={() => addToCart && addToCart(product)}
+                                onClick={(e) => {
+                                    addToCart &&
+                                        addToCart({
+                                            id: product.id,
+                                            name: product.name,
+                                        });
+                                    e.stopPropagation();
+                                }}
                             />
                         )
                     ) : null}
