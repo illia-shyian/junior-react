@@ -46,6 +46,7 @@ body {
                 width: 100%;
 
                 & .AttributeItem {
+                    padding-bottom: 10px;
                     & .attribute-value {
                         cursor: pointer;
 
@@ -61,7 +62,9 @@ body {
 
                         &.text {
                             border: 1px solid #1d1f22;
-                            padding: 12px 22px;
+                            padding: 12px 5px;
+                            min-width: 64px;
+                            text-align: center;
                             margin-right: 12px;
                             font-family: "Source Sans Pro";
                             font-style: normal;
@@ -125,6 +128,7 @@ body {
                 max-width: 40%;
 
                 & .action-item {
+                    position: relative;
                     height: 100%;
                     line-height: 80px;
                     text-transform: uppercase;
@@ -159,24 +163,67 @@ body {
                     }
 
                     & .MiniCart {
-                        position: relative;
+                        position: absolute;
+                        padding: 30px 15px;
+                        width: 325px;
+                        right: calc(100% - 40px);
+                        background: #fff;
+                        z-index: 2;
 
                         & .MiniCartItemList {
-                            right: calc(100% - 40px);
-                            max-height: 550px;
+                            width: 100%;
+                            max-height: 350px;
                             overflow-y: auto;
 
                             cursor: default;
-                            width: 325px;
-                            position: absolute;
-                            background: #fff;
-                            z-index: 2;
+
+                            &::-webkit-scrollbar {
+                                width: 6px;
+                                height: 6px;
+                            }
+                            &::-webkit-scrollbar-track {
+                                border-radius: 10px;
+                                background: rgba(0, 0, 0, 0.1);
+                            }
+                            &::-webkit-scrollbar-thumb {
+                                border-radius: 10px;
+                                background: rgba(0, 0, 0, 0.2);
+                            }
+                            &::-webkit-scrollbar-thumb:hover {
+                                background: rgba(0, 0, 0, 0.4);
+                            }
+                            &::-webkit-scrollbar-thumb:active {
+                                background: rgba(0, 0, 0, 0.9);
+                            }
 
                             & .MiniCartItem {
-                                padding: 15px;
+                                padding: 15px 0;
                                 display: grid;
                                 column-gap: 6px;
-                                grid-template-columns: 135px 24px 120px;
+                                grid-template-columns: 135px 24px 118px;
+
+                                & .Counter {
+                                    display: flex;
+                                    flex-direction: column;
+                                    justify-content: space-between;
+                                    max-height: 200px;
+                                    & > .count {
+                                        font-family: "Raleway";
+                                        font-style: normal;
+                                        font-weight: 500;
+                                        font-size: 16px;
+                                        line-height: 160%;
+
+                                        text-align: center;
+
+                                        color: #1d1f22;
+                                    }
+                                    & > .plus,
+                                    & > .minus {
+                                        cursor: pointer;
+                                        height: 48px;
+                                    }
+                                }
 
                                 & .description {
                                     & .product-name {
@@ -194,6 +241,17 @@ body {
                                         font-size: 16px;
                                         line-height: 26px;
                                     }
+
+                                    & .product-price {
+                                        font-family: "Raleway";
+                                        font-style: normal;
+                                        font-weight: 700;
+                                        font-size: 16px;
+                                        line-height: 160%;
+                                        color: #1d1f22;
+                                        padding-bottom: 8px;
+                                    }
+
                                     & .Attributes {
                                         padding-bottom: 0px;
                                         & .AttributeSet {
@@ -205,6 +263,7 @@ body {
                                                 line-height: 16px;
                                             }
                                             & .attribute-item-list {
+                                                flex-wrap: nowrap;
                                                 & .AttributeItem {
                                                     & .attribute-value {
                                                         &.swatch {
@@ -213,12 +272,13 @@ body {
                                                         }
 
                                                         &.text {
-                                                            height: 40px;
-                                                            padding: 0 5px;
+                                                            height: 24px;
+                                                            min-width: 24px;
+                                                            padding: 0px 5px;
                                                             min-width: 24px;
                                                             margin-right: 8px;
                                                             font-size: 14px;
-                                                            line-height: 40px;
+                                                            line-height: 24px;
                                                         }
                                                     }
                                                 }
@@ -230,8 +290,31 @@ body {
                                 & .product-image {
                                     & img {
                                         width: 100%;
+                                        max-height: 200px;
                                     }
                                 }
+                            }
+                        }
+
+                        & .total {
+                            padding-top: 30px;
+                            display: flex;
+                            justify-content: space-between;
+
+                            & .total-text {
+                                font-family: "Roboto";
+                                font-style: normal;
+                                font-weight: 500;
+                                font-size: 16px;
+                                line-height: 18px;
+                                text-transform: none;
+                            }
+                            & .total-value {
+                                font-family: "Raleway";
+                                font-style: normal;
+                                font-weight: 700;
+                                font-size: 16px;
+                                line-height: 160%;
                             }
                         }
                     }

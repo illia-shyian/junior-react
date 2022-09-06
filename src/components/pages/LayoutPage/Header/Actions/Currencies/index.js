@@ -30,7 +30,7 @@ class Currency extends Component {
             <div className="Currency">
                 <div
                     className="menu"
-                    onMouseEnter={() => setIsOpen(true)}
+                    onClick={() => setIsOpen(!isOpen)}
                     onMouseLeave={() => setIsOpen(false)}
                 >
                     <div className="current">

@@ -22,8 +22,10 @@ class Actions extends Component {
             closeOverlay();
             this.setIsMiniCartOpen(false);
         } else {
-            Object.entries(cart)?.length && openOverlay();
-            this.setIsMiniCartOpen(true);
+            if (Object.entries(cart)?.length) {
+                openOverlay();
+                this.setIsMiniCartOpen(true);
+            }
         }
     };
 
@@ -45,6 +47,15 @@ class Actions extends Component {
 
     componentDidMount() {
         document.addEventListener("mousedown", this.checkClickOutsideMiniCart);
+    }
+
+    componentDidUpdate(prevProps) {
+        if (this.props !== prevProps) {
+            const { cart = {} } = this.props || {};
+            if (!Object.entries(cart)?.length) {
+                this.handleOnMiniCartClose();
+            }
+        }
     }
 
     componentWillUnmount() {

@@ -1,6 +1,6 @@
 import { Component } from "react";
 import { generateCartItemKey } from "../../../../../../../helpers";
-import { MiniCartItem } from "../MiniCartItem";
+import { CMiniCartitem, MiniCartItem } from "../MiniCartItem";
 
 export class MiniCartItemList extends Component {
     render() {
@@ -9,7 +9,7 @@ export class MiniCartItemList extends Component {
         return (
             <div className="MiniCartItemList">
                 {(items || [])?.map((item) => (
-                    <MiniCartItem
+                    <CMiniCartitem
                         {...this.props}
                         item={item}
                         key={generateCartItemKey(item.product)}
