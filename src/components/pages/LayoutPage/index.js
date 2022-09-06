@@ -7,7 +7,7 @@ import { actionProductById } from "../../../actions/actionProductById";
 import { CartPage } from "../CartPage";
 import { CCategoryPage } from "../CategoryPage";
 import { CProductPage, ProductPage } from "../ProductPage";
-import { Content } from "./Content";
+import { CContent, Content } from "./Content";
 import { Footer } from "./Footer";
 import { Header } from "./Header";
 
@@ -72,7 +72,7 @@ class LayoutPage extends Component {
         return (
             <div className="LayoutPage">
                 <Header />
-                <Content>
+                <CContent>
                     <Switch>
                         <Route
                             path="/category/:name"
@@ -85,7 +85,7 @@ class LayoutPage extends Component {
                         />
                         <Route path="/cart" component={CartPage} />
                     </Switch>
-                </Content>
+                </CContent>
                 <Footer />
             </div>
         );

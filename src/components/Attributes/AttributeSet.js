@@ -13,7 +13,9 @@ class AttributeSet extends Component {
                             {...this.props}
                             item={item}
                             type={set?.type}
-                            onSelect={(value) => onSelect(set?.name, value)}
+                            onSelect={(value) =>
+                                onSelect && onSelect(set?.name, value)
+                            }
                         />
                     ))}
                 </div>

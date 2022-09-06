@@ -1,3 +1,5 @@
+import { generateCartItemKey } from "../helpers";
+
 export function cartReducer(state = {}, { type, product, count = 1 }) {
     if (count <= 0) {
         type = "CART_DELETE";
@@ -6,7 +8,7 @@ export function cartReducer(state = {}, { type, product, count = 1 }) {
     if (type === "CART_ADD") {
         return {
             ...state,
-            [product["id"]]: {
+            [generateCartItemKey(product)]: {
                 product,
                 count:
                     product["id"] in state
@@ -18,14 +20,14 @@ export function cartReducer(state = {}, { type, product, count = 1 }) {
     if (type === "CART_CHANGE") {
         return {
             ...state,
-            [product["id"]]: {
+            [generateCartItemKey(product)]: {
                 product,
                 count: count,
             },
         };
     }
     if (type === "CART_DELETE") {
-        let { [product.id]: toRemove, ...newState } = state;
+        let { [generateCartItemKey(product)]: toRemove, ...newState } = state;
         return newState;
     }
     if (type === "CART_CLEAR") {

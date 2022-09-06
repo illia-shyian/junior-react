@@ -15,9 +15,70 @@ body {
     font-style: normal;
 }
 
+.Overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background: rgba(57, 55, 72, 0.22);
+}
+
 .LayoutPage {
     padding-left: 100px;
     padding-right: 100px;
+
+    & .Attributes {
+        padding-bottom: 14px;
+        & .AttributeSet {
+            padding-bottom: 24px;
+            & .attribute-set-name {
+                font-family: "Roboto Condensed";
+                font-style: normal;
+                font-weight: 700;
+                font-size: 18px;
+                line-height: 18px;
+                padding-bottom: 8px;
+            }
+            & .attribute-item-list {
+                display: flex;
+                flex-wrap: wrap;
+                width: 100%;
+
+                & .AttributeItem {
+                    & .attribute-value {
+                        cursor: pointer;
+
+                        &.swatch {
+                            width: 32px;
+                            margin-right: 8px;
+                            height: 32px;
+
+                            &.selected {
+                                border: 1px solid #5ece7b;
+                            }
+                        }
+
+                        &.text {
+                            border: 1px solid #1d1f22;
+                            padding: 12px 22px;
+                            margin-right: 12px;
+                            font-family: "Source Sans Pro";
+                            font-style: normal;
+                            font-weight: 400;
+                            font-size: 16px;
+
+                            &.selected {
+                                background: #1d1f22;
+                                color: #fff;
+                                border: 1px solid #1d1f22;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
 
     & .Header {
         height: 80px;
@@ -70,9 +131,10 @@ body {
                     cursor: pointer;
 
                     & .CartIcon {
-                        height: 20px;
-                        width: 20px;
-                        margin: 5px auto;
+                        height: 80px;
+                        display: flex;
+                        align-items: center;
+                        padding: 0px 10px;
                         position: relative;
 
                         & .CountBadge {
@@ -91,8 +153,86 @@ body {
                             font-size: 12px;
                             line-height: 20px;
 
-                            top: 15px;
-                            right: -10px;
+                            top: 20px;
+                            left: 20px;
+                        }
+                    }
+
+                    & .MiniCart {
+                        position: relative;
+
+                        & .MiniCartItemList {
+                            right: calc(100% - 40px);
+                            max-height: 550px;
+                            overflow-y: auto;
+
+                            cursor: default;
+                            width: 325px;
+                            position: absolute;
+                            background: #fff;
+                            z-index: 2;
+
+                            & .MiniCartItem {
+                                padding: 15px;
+                                display: grid;
+                                column-gap: 6px;
+                                grid-template-columns: 135px 24px 120px;
+
+                                & .description {
+                                    & .product-name {
+                                        font-family: "Raleway";
+                                        font-style: normal;
+                                        font-weight: 300;
+                                        font-size: 16px;
+                                        line-height: 26px;
+                                    }
+
+                                    & .product-type {
+                                        font-family: "Raleway";
+                                        font-style: normal;
+                                        font-weight: 300;
+                                        font-size: 16px;
+                                        line-height: 26px;
+                                    }
+                                    & .Attributes {
+                                        padding-bottom: 0px;
+                                        & .AttributeSet {
+                                            padding-bottom: 8px;
+                                            & .attribute-set-name {
+                                                font-family: "Raleway";
+                                                font-weight: 400;
+                                                font-size: 14px;
+                                                line-height: 16px;
+                                            }
+                                            & .attribute-item-list {
+                                                & .AttributeItem {
+                                                    & .attribute-value {
+                                                        &.swatch {
+                                                            width: 16px;
+                                                            height: 16px;
+                                                        }
+
+                                                        &.text {
+                                                            height: 40px;
+                                                            padding: 0 5px;
+                                                            min-width: 24px;
+                                                            margin-right: 8px;
+                                                            font-size: 14px;
+                                                            line-height: 40px;
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+
+                                & .product-image {
+                                    & img {
+                                        width: 100%;
+                                    }
+                                }
+                            }
                         }
                     }
 
@@ -193,6 +333,11 @@ body {
 
     & .Content {
         margin-top: 80px;
+
+        & .Overlay {
+            height: calc(100vh - 82px);
+            top: 82px;
+        }
 
         & .CategoryPage {
             & > .title {
@@ -467,58 +612,6 @@ body {
                     font-weight: 400;
                     font-size: 16px;
                     line-height: 159.96%;
-                }
-
-                & .Attributes {
-                    padding-bottom: 14px;
-                    & .AttributeSet {
-                        padding-bottom: 24px;
-                        & .attribute-set-name {
-                            font-family: "Roboto Condensed";
-                            font-style: normal;
-                            font-weight: 700;
-                            font-size: 18px;
-                            line-height: 18px;
-                            padding-bottom: 8px;
-                        }
-                        & .attribute-item-list {
-                            display: flex;
-                            flex-wrap: nowrap;
-                            width: 100%;
-
-                            & .AttributeItem {
-                                & .attribute-value {
-                                    cursor: pointer;
-
-                                    &.swatch {
-                                        width: 32px;
-                                        margin-right: 8px;
-                                        height: 32px;
-
-                                        &.selected {
-                                            border: 1px solid #5ece7b;
-                                        }
-                                    }
-
-                                    &.text {
-                                        border: 1px solid #1d1f22;
-                                        padding: 12px 22px;
-                                        margin-right: 12px;
-                                        font-family: "Source Sans Pro";
-                                        font-style: normal;
-                                        font-weight: 400;
-                                        font-size: 16px;
-
-                                        &.selected {
-                                            background: #1d1f22;
-                                            color: #fff;
-                                            border: 1px solid #1d1f22;
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
                 }
             }
         }

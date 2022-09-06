@@ -22,9 +22,11 @@ class ProductPage extends Component {
             currency = null,
             onBuyButtonClick = null,
         } = this.props || {};
+
         const price = product?.prices?.find(
             (price) => price?.currency?.label === currency?.label
         );
+
         return (
             <div className="ProductPage">
                 <Slider images={product?.gallery} />
@@ -49,7 +51,8 @@ class ProductPage extends Component {
                                 onBuyButtonClick &&
                                 onBuyButtonClick({
                                     ...product,
-                                    attributes: this.state.selectedAttributes,
+                                    selectedAttributes:
+                                        this.state.selectedAttributes,
                                 })
                             }
                         />

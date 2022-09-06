@@ -19,6 +19,11 @@ import {
 } from "./cartReducer";
 import { actionFeedClear, actionFeedAdd, feedReducer } from "./feedReducer";
 import { actionCurrencySetSelected, currencyReducer } from "./currencyReducer";
+import {
+    overlayReducer,
+    actionCloseContentOverlay,
+    actionOpenContentOverlay,
+} from "./overlayReducer";
 
 export {
     cartReducer,
@@ -27,6 +32,7 @@ export {
     actionCartDelete,
     actionCartClear,
 };
+export { overlayReducer, actionCloseContentOverlay, actionOpenContentOverlay };
 export {
     promiseReducer,
     actionPending,
@@ -43,6 +49,7 @@ export const store = createStore(
         cart: cartReducer,
         feed: feedReducer,
         currency: currencyReducer,
+        overlay: overlayReducer,
     }),
     applyMiddleware(thunk)
 );
