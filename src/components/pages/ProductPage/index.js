@@ -1,15 +1,31 @@
 import { Component } from "react";
 import { connect } from "react-redux";
 import { Attributes } from "../../Attributes";
-import { BuyButton } from "./BuyButton";
-import { Slider } from "./Slider";
+import { BuyButton } from "../../BuyButton";
+import { Slider } from "../../Slider";
 import parse from "html-react-parser";
 import { actionCartAdd } from "../../../reducers";
+import { getCurrentCurrency } from "../../../helpers";
 
 class ProductPage extends Component {
     state = {
         selectedAttributes: {},
     };
+
+    updateCurrency = () => {
+        this.props.currencies?.length &&
+            this.setState({ currency: getCurrentCurrency() });
+    };
+
+    componentDidMount() {
+        this.updateCurrency();
+    }
+
+    componentDidUpdate(prevProps) {
+        if (prevProps !== this.props) {
+            this.updateCurrency();
+        }
+    }
 
     setAttribute = (key, value) =>
         this.setState((state) => ({
@@ -17,14 +33,10 @@ class ProductPage extends Component {
         }));
 
     render() {
-        const {
-            product = {},
-            currency = null,
-            onBuyButtonClick = null,
-        } = this.props || {};
+        const { product = {}, onBuyButtonClick = null } = this.props || {};
 
         const price = product?.prices?.find(
-            (price) => price?.currency?.label === currency?.label
+            (price) => price?.currency?.label === this.state.currency?.label
         );
 
         return (
@@ -69,7 +81,7 @@ class ProductPage extends Component {
 export const CProductPage = connect(
     (state) => ({
         product: state.promise?.productById?.payload || {},
-        currency: state?.currency?.selected || null,
+        currencies: state.promise?.currenciesAll?.payload || null,
     }),
     { onBuyButtonClick: (product) => actionCartAdd(product, 1) }
 )(ProductPage);

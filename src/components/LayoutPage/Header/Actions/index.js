@@ -3,10 +3,10 @@ import { connect } from "react-redux";
 import {
     actionCloseContentOverlay,
     actionOpenContentOverlay,
-} from "../../../../../reducers";
-import { CCurrency } from "./Currencies";
-import { CMiniCart, MiniCart } from "./MiniCart";
-import { CartIcon } from "./MiniCart/CartIcon";
+} from "../../../../reducers";
+import { CCurrency } from "../../../Currencies";
+import { CMiniCart } from "../../../MiniCart";
+import { CartIcon } from "../../../MiniCart/CartIcon";
 
 class Actions extends Component {
     state = {
@@ -52,7 +52,7 @@ class Actions extends Component {
     componentDidUpdate(prevProps) {
         if (this.props !== prevProps) {
             const { cart = {} } = this.props || {};
-            if (!Object.entries(cart)?.length) {
+            if (!Object.entries(cart)?.length && this.state.isMiniCartOpen) {
                 this.handleOnMiniCartClose();
             }
         }
@@ -74,7 +74,10 @@ class Actions extends Component {
                     </div>
                     <div className="action-item" ref={this.miniCartRef}>
                         <CartIcon onClick={this.handleOnMiniCartClick} />
-                        <CMiniCart isMiniCartOpen={this.state.isMiniCartOpen} />
+                        <CMiniCart
+                            isMiniCartOpen={this.state.isMiniCartOpen}
+                            onClose={this.handleOnMiniCartClose}
+                        />
                     </div>
                 </div>
             </div>

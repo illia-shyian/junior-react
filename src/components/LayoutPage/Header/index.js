@@ -1,5 +1,5 @@
 import { Component } from "react";
-import { Logo } from "../../../Logo";
+import { Logo } from "../../Logo";
 import { CActions } from "./Actions";
 import { CCategories } from "./Categories";
 

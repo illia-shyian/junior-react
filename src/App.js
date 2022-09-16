@@ -3,7 +3,7 @@ import { Router } from "react-router-dom";
 import "./App.css";
 import { store } from "./reducers";
 import createHistory from "history/createBrowserHistory";
-import { CLayoutPage } from "./components/pages/LayoutPage";
+import { CLayoutPage } from "./components/LayoutPage";
 
 export const history = createHistory();
 
@@ -18,7 +18,5 @@ function App() {
         </div>
     );
 }
-
-store.subscribe(() => console.log(store.getState()));
 
 export default App;

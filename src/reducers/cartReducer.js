@@ -1,6 +1,9 @@
 import { generateCartItemKey } from "../helpers";
 
-export function cartReducer(state = {}, { type, product, count = 1 }) {
+export function cartReducer(state = undefined, { type, product, count = 1 }) {
+    if (!state) {
+        state = JSON.parse(localStorage?.cart || "{}");
+    }
     if (count <= 0) {
         type = "CART_DELETE";
     }

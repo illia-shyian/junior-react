@@ -1,14 +1,14 @@
-import { Component, useEffect } from "react";
+import { Component } from "react";
 import { connect } from "react-redux";
-import { Route, Switch } from "react-router-dom";
-import { actionCategoryByName } from "../../../actions/actionCategoryByName";
-import { actionPageStart } from "../../../actions/actionPageStart";
-import { actionProductById } from "../../../actions/actionProductById";
-import { CartPage } from "../CartPage";
-import { CCategoryPage } from "../CategoryPage";
-import { CProductPage, ProductPage } from "../ProductPage";
-import { CContent, Content } from "./Content";
-import { Footer } from "./Footer";
+import { Redirect, Route, Switch } from "react-router-dom";
+import { actionCategoryByName } from "../../actions/actionCategoryByName";
+import { actionPageStart } from "../../actions/actionPageStart";
+import { actionProductById } from "../../actions/actionProductById";
+import { CCartPage } from "../pages/CartPage";
+import { CCategoryPage } from "../pages/CategoryPage";
+import { CProductPage } from "../pages/ProductPage";
+import { ScrollToTopWithRouter } from "../ScrollToTop";
+import { CContent } from "./Content";
 import { Header } from "./Header";
 
 class CategoryPageContainer extends Component {
@@ -69,11 +69,28 @@ class LayoutPage extends Component {
         onLoad && onLoad();
     }
     render() {
+        const { categories = [] } = this.props || {};
+        console.log(categories);
         return (
             <div className="LayoutPage">
+                <ScrollToTopWithRouter />
                 <Header />
                 <CContent>
                     <Switch>
+                        <Route path="/" exact>
+                            {categories?.length ? (
+                                <Redirect
+                                    to={`/category/${categories[0].name}`}
+                                />
+                            ) : (
+                                ""
+                            )}
+                        </Route>
+                        <Route
+                            path="/category/:name"
+                            component={CCategoryPageContainer}
+                            exact
+                        />
                         <Route
                             path="/category/:name"
                             component={CCategoryPageContainer}
@@ -83,17 +100,17 @@ class LayoutPage extends Component {
                             path="/product/:id"
                             component={CProductPageContainer}
                         />
-                        <Route path="/cart" component={CartPage} />
+                        <Route path="/cart" component={CCartPage} />
                     </Switch>
                 </CContent>
-                <Footer />
             </div>
         );
     }
 }
 
-export const CLayoutPage = connect(null, { onLoad: actionPageStart })(
-    LayoutPage
-);
+export const CLayoutPage = connect(
+    (state) => ({ categories: state?.promise?.categoriesAll?.payload || [] }),
+    { onLoad: actionPageStart }
+)(LayoutPage);
 
 export { LayoutPage };

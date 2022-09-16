@@ -1,6 +1,6 @@
 import { Component } from "react";
 import { connect } from "react-redux";
-import { Overlay } from "../../../Overlay";
+import { Overlay } from "../../Overlay";
 
 class Content extends Component {
     state = {

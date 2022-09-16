@@ -1,5 +1,5 @@
 import { Component } from "react";
-import { ReactComponent as CartAddImage } from "../../../images/cart_add.svg";
+import { ReactComponent as CartAddImage } from "../../images/cart_add.svg";
 
 class CartAddIcon extends Component {
     render() {

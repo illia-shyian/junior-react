@@ -1,22 +1,40 @@
 import { Component } from "react";
-import { connect, Provider } from "react-redux";
+import { connect } from "react-redux";
 import { Link, withRouter } from "react-router-dom";
+import { getCurrentCurrency } from "../../helpers";
 import { actionCartAdd } from "../../reducers";
-import { CartAddIcon } from "./CartAddIcon";
+import { CartAddIcon } from "../CartAddIcon";
 
 export class ProductCard extends Component {
     state = {
         isHover: false,
+        currency: false,
     };
 
     setIsHover = (value) => this.setState({ isHover: value });
+
+    updateCurrency = () => {
+        this.props.currencies?.length &&
+            this.setState({ currency: getCurrentCurrency() });
+    };
+
+    componentDidMount() {
+        this.updateCurrency();
+    }
+
+    componentDidUpdate(prevProps) {
+        if (prevProps !== this.props) {
+            this.updateCurrency();
+        }
+    }
+
     render() {
         const {
             product = null,
-            currency = null,
             addToCart = null,
             history = {},
         } = this.props || {};
+
         return (
             <div
                 className="ProductCard"
@@ -40,11 +58,7 @@ export class ProductCard extends Component {
                             <CartAddIcon
                                 isActive={this.state.isHover}
                                 onClick={(e) => {
-                                    addToCart &&
-                                        addToCart({
-                                            id: product.id,
-                                            name: product.name,
-                                        });
+                                    addToCart && addToCart(product);
                                     e.stopPropagation();
                                 }}
                             />
@@ -56,10 +70,11 @@ export class ProductCard extends Component {
                     {
                         product?.prices?.find(
                             (price) =>
-                                price?.currency?.label === currency?.label
+                                price?.currency?.label ===
+                                this.state.currency?.label
                         )?.amount
                     }
-                    {currency?.symbol}
+                    {this.state.currency?.symbol}
                 </div>
                 {!product?.inStock && (
                     <div className="card-out-of-stock-overlay"></div>
@@ -70,9 +85,7 @@ export class ProductCard extends Component {
 }
 
 export const CProductCard = connect(
-    (state) => ({
-        currency: state?.currency?.selected || null,
-    }),
+    (state) => ({ currencies: state?.promise?.currenciesAll?.payload || [] }),
     {
         addToCart: (product) => actionCartAdd(product, 1),
     }

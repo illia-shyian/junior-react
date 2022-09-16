@@ -1,6 +1,6 @@
 import { Component } from "react";
-import { ReactComponent as Plus } from "../../../../../../../../images/plus.svg";
-import { ReactComponent as Minus } from "../../../../../../../../images/minus.svg";
+import { ReactComponent as Plus } from "../../../../images/plus.svg";
+import { ReactComponent as Minus } from "../../../../images/minus.svg";
 
 export class Counter extends Component {
     render() {

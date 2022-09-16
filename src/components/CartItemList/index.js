@@ -1,15 +1,15 @@
 import { Component } from "react";
-import { generateCartItemKey } from "../../../../../../../helpers";
-import { CMiniCartitem, MiniCartItem } from "../MiniCartItem";
+import { generateCartItemKey } from "../../helpers";
+import { CCartitem } from "./CartItem";
 
-export class MiniCartItemList extends Component {
+export class CartItemList extends Component {
     render() {
         const { items = [] } = this.props || {};
         console.log(items);
         return (
-            <div className="MiniCartItemList">
+            <div className="CartItemList">
                 {(items || [])?.map((item) => (
-                    <CMiniCartitem
+                    <CCartitem
                         {...this.props}
                         item={item}
                         key={generateCartItemKey(item.product)}
