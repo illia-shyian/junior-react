@@ -8,6 +8,7 @@ import { CCartPage } from "../pages/CartPage";
 import { CCategoryPage } from "../pages/CategoryPage";
 import { CProductPage } from "../pages/ProductPage";
 import { ScrollToTopWithRouter } from "../ScrollToTop";
+import { Test } from "../Test";
 import { CContent } from "./Content";
 import { Header } from "./Header";
 
@@ -100,6 +101,7 @@ class LayoutPage extends Component {
                             path="/product/:id"
                             component={CProductPageContainer}
                         />
+                        <Route path="/test" component={Test} />
                         <Route path="/cart" component={CCartPage} />
                     </Switch>
                 </CContent>
