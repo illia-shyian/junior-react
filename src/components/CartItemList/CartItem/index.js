@@ -3,6 +3,11 @@ import { connect } from "react-redux";
 import { getCurrentCurrency, getPrice } from "../../../helpers";
 import { actionCartChange } from "../../../reducers";
 import { Attributes } from "../../Attributes";
+import {
+    CarouselHorizontal,
+    CarouselItem,
+    CarouselVertical,
+} from "../../Carousel";
 import { Counter } from "./Counter";
 
 export class CartItem extends Component {
@@ -24,13 +29,11 @@ export class CartItem extends Component {
         }
     }
     render() {
-        const {
-            onCountChange,
-            item: { product = {}, count = 1 },
-        } = this.props || {};
-
+        const { onCountChange, item: { product = {}, count = 1 } = {} } =
+            this.props || {};
+        const displayCarousel = this.props.displayCarousel || false;
         const price = getPrice(this.state.currency?.label, product);
-        console.log(product);
+
         return (
             <div className="CartItem">
                 <div className="description">
@@ -56,13 +59,19 @@ export class CartItem extends Component {
                         }
                     />
                     <div className="product-image">
-                        <img
-                            src={
-                                (product?.gallery?.length &&
-                                    product?.gallery[0]) ||
-                                ""
-                            }
-                        />
+                        {product?.gallery?.length > 1 && displayCarousel ? (
+                            <CarouselHorizontal items={1}>
+                                {(product?.gallery || [])?.map((image) => (
+                                    <CarouselItem>
+                                        <img src={image} />
+                                    </CarouselItem>
+                                ))}
+                            </CarouselHorizontal>
+                        ) : (
+                            <img
+                                src={product?.gallery && product?.gallery[0]}
+                            />
+                        )}
                     </div>
                 </div>
             </div>

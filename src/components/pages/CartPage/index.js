@@ -43,7 +43,10 @@ class CartPage extends Component {
         return Object.values(cart)?.length ? (
             <div className="CartPage">
                 <div className="title">Cart</div>
-                <CartItemList items={Object.values(cart) || []} />
+                <CartItemList
+                    items={Object.values(cart) || []}
+                    displayCarousel={true}
+                />
                 <div className="cost">
                     <div className="tax">
                         Tax 21%:{" "}

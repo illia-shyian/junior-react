@@ -199,7 +199,7 @@ body {
                                                 & .AttributeItem {
                                                     padding-bottom: 10px;
                                                     & .attribute-value {
-                                                        cursor: pointer;
+                                                        cursor: default;
 
                                                         &.swatch {
                                                             width: 16px;
@@ -243,13 +243,13 @@ body {
 
                                 & .product-image-counter {
                                     display: grid;
-                                    grid-template-columns: 45px 1fr;
+                                    grid-template-columns: 24px 1fr;
 
                                     & .Counter {
                                         display: flex;
                                         flex-direction: column;
                                         justify-content: space-between;
-                                        max-height: 200px;
+                                        height: 145px;
                                         & > .count {
                                             font-family: "Raleway";
                                             font-style: normal;
@@ -268,11 +268,65 @@ body {
                                             line-height: 24px;
                                         }
                                     }
-                                    & .product-image {
+                                    & img {
+                                        display: block;
+                                        max-width: 100%;
+                                        max-height: 145px;
+                                        user-select: none;
+                                        object-fit: contain;
+                                    }
+                                    .CarouselHorizontal {
+                                        overflow: hidden;
                                         width: 100%;
-                                        & img {
+                                        height: 145px;
+                                        position: relative;
+                                        & .wrapper {
+                                            overflow: hidden;
                                             width: 100%;
-                                            max-height: 200px;
+                                            height: 100%;
+                                            position: relative;
+
+                                            & .inner {
+                                                height: 100%;
+                                                transition: all 0.3s;
+                                                white-space: nowrap;
+                                                & .CarouselItem {
+                                                    width: 100%;
+                                                    height: 100%;
+                                                    display: inline-flex;
+                                                    justify-content: center;
+                                                    align-items: center;
+                                                }
+                                            }
+
+                                            & .arrows {
+                                                display: flex;
+                                                position: absolute;
+                                                padding: 7px;
+                                                bottom: 0px;
+                                                justify-content: right;
+                                                width: 100%;
+                                                & .arrow-wrapper {
+                                                    display: flex;
+                                                    align-items: center;
+                                                    margin-left: 4px;
+                                                    background: rgba(
+                                                        0,
+                                                        0,
+                                                        0,
+                                                        0.73
+                                                    );
+                                                    padding: 2px;
+                                                    cursor: pointer;
+                                                    & .arrow {
+                                                        &.left {
+                                                            transform: rotate(
+                                                                180deg
+                                                            );
+                                                        }
+                                                    }
+                                                }
+                                            }
                                         }
                                     }
                                 }
@@ -566,7 +620,7 @@ body {
                             display: flex;
                             flex-direction: column;
                             justify-content: space-between;
-                            height: 100%;
+                            height: 290px;
                             & > .count {
                                 font-family: "Raleway";
                                 font-style: normal;
@@ -590,8 +644,58 @@ body {
 
                         & .product-image {
                             & img {
-                                width: 100%;
-                                max-height: 300px;
+                                display: block;
+                                max-width: 200px;
+                                max-height: 290px;
+                                user-select: none;
+                                object-fit: contain;
+                            }
+                            .CarouselHorizontal {
+                                overflow: hidden;
+                                max-width: 200px;
+                                max-height: 290px;
+
+                                & .wrapper {
+                                    overflow: hidden;
+                                    width: 100%;
+                                    height: 100%;
+                                    position: relative;
+
+                                    & .inner {
+                                        height: 100%;
+                                        transition: all 0.3s;
+                                        white-space: nowrap;
+                                        & .CarouselItem {
+                                            width: 100%;
+                                            height: 100%;
+                                            display: inline-flex;
+                                            justify-content: center;
+                                            align-items: center;
+                                        }
+                                    }
+
+                                    & .arrows {
+                                        display: flex;
+                                        position: absolute;
+                                        padding: 15px;
+                                        bottom: 0px;
+                                        justify-content: right;
+                                        width: 100%;
+                                        & .arrow-wrapper {
+                                            display: flex;
+                                            align-items: center;
+                                            margin-left: 8px;
+                                            background: rgba(0, 0, 0, 0.73);
+                                            padding: 3px;
+                                            cursor: pointer;
+                                            & .arrow {
+                                                &.left {
+                                                    transform: rotate(180deg);
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
                             }
                         }
                     }
@@ -760,7 +864,7 @@ body {
                 height: 500px;
                 position: relative;
 
-                .Carousel {
+                .CarouselVertical {
                     overflow: hidden;
 
                     & .arrow-wrapper {
@@ -836,7 +940,7 @@ body {
 
                         & .inner {
                             height: 100%;
-                            transition: transform 0.3s;
+                            transition: all 0.3s;
                             & .CarouselItem {
                                 width: 100%;
                                 display: flex;

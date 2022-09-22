@@ -1,12 +1,13 @@
 import { Component } from "react";
+import { Link } from "react-router-dom";
 import { ReactComponent as LogoImage } from "../../images/logo.svg";
 
 class Logo extends Component {
     render() {
         return (
-            <div className="Logo">
+            <Link to="/" className="Logo">
                 <LogoImage />
-            </div>
+            </Link>
         );
     }
 }

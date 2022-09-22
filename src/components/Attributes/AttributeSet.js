@@ -8,11 +8,11 @@ class AttributeSet extends Component {
             <div className="AttributeSet">
                 <div className="attribute-set-name">{set?.name}:</div>
                 <div className="attribute-item-list-wrapper">
-                    {" "}
                     <div className="attribute-item-list">
                         {(set?.items || []).map((item) => (
                             <AttributeItem
                                 {...this.props}
+                                key={item?.name}
                                 item={item}
                                 type={set?.type}
                                 onSelect={(value) =>

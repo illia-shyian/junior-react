@@ -30,6 +30,7 @@ class Attributes extends Component {
             <div className="Attributes">
                 {(attributes || []).map((set) => (
                     <AttributeSet
+                        key={set.name}
                         set={set}
                         onSelect={setAttribute}
                         selectedValue={selectedAttributes[set.name]}

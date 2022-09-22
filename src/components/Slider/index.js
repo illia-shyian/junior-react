@@ -1,6 +1,6 @@
 import { Component } from "react";
-import { Carousel } from "../Carousel";
-import { CarouselItem } from "../Carousel/CarouselItem";
+import { CarouselVertical } from "../Carousel";
+import { CarouselItem } from "../Carousel";
 
 export class Slider extends Component {
     state = {
@@ -25,7 +25,7 @@ export class Slider extends Component {
 
         return (
             <div className="Slider">
-                <Carousel direction="vertical" items={5}>
+                <CarouselVertical items={4} marginTop={30}>
                     {images?.map((image) => (
                         <CarouselItem
                             key={image}
@@ -34,7 +34,7 @@ export class Slider extends Component {
                             <img src={image} />
                         </CarouselItem>
                     ))}
-                </Carousel>
+                </CarouselVertical>
                 <div className="selected-image">
                     <img src={this.state.selectedImage} />
                 </div>
