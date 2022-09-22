@@ -2,6 +2,7 @@ import { Component } from "react";
 import { connect } from "react-redux";
 import { Redirect } from "react-router-dom";
 import { getCurrentCurrency, getPrice } from "../../../helpers";
+import { Button } from "../../Button";
 import { CartItemList } from "../../CartItemList";
 
 class CartPage extends Component {
@@ -72,7 +73,7 @@ class CartPage extends Component {
                             </b>
                         </span>
                     </div>
-                    <div className="orderButton">ORDER</div>
+                    <Button>ORDER</Button>
                 </div>
             </div>
         ) : (

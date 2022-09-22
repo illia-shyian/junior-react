@@ -14,8 +14,8 @@ export function cartReducer(state = undefined, { type, product, count = 1 }) {
             [generateCartItemKey(product)]: {
                 product,
                 count:
-                    product["id"] in state
-                        ? state[product.id].count + count
+                    [generateCartItemKey(product)] in state
+                        ? state[[generateCartItemKey(product)]].count + count
                         : count,
             },
         };

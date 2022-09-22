@@ -1,11 +1,11 @@
 import { Component } from "react";
 import { connect } from "react-redux";
 import { Attributes } from "../../Attributes";
-import { BuyButton } from "../../BuyButton";
 import { Slider } from "../../Slider";
 import parse from "html-react-parser";
 import { actionCartAdd } from "../../../reducers";
 import { getCurrentCurrency } from "../../../helpers";
+import { Button } from "../../Button";
 
 class ProductPage extends Component {
     state = {
@@ -58,7 +58,7 @@ class ProductPage extends Component {
                         </div>
                     </div>
                     {product?.inStock && (
-                        <BuyButton
+                        <Button
                             onClick={() =>
                                 onBuyButtonClick &&
                                 onBuyButtonClick({
@@ -67,7 +67,9 @@ class ProductPage extends Component {
                                         this.state.selectedAttributes,
                                 })
                             }
-                        />
+                        >
+                            Add To Cart
+                        </Button>
                     )}
                     <div className="product-description">
                         {parse(product?.description || "")}
