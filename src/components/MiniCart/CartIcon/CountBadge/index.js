@@ -9,7 +9,6 @@ export class CountBadge extends Component {
             0
         );
 
-        console.log(count);
         return count ? <div className="CountBadge">{count}</div> : null;
     }
 }

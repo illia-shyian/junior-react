@@ -1,9 +1,15 @@
 export const generateCartItemKey = (item) => {
-    const key =
+    console.log(item);
+    let key =
         item.name +
         Object.entries(item.selectedAttributes || [])?.reduce(
             (prev, [key, value]) => prev + key + value,
             ""
         );
-    return key.replace(/\s/g, "");
+    key = key.replace(/\s/g, "");
+
+    key.includes("Sizeundentified") &&
+        console.log("key" + key) &&
+        console.log(item);
+    return key;
 };

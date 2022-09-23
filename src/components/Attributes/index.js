@@ -11,9 +11,16 @@ class Attributes extends Component {
     }
 
     componentDidUpdate(prevProps) {
-        const { attributes = {}, setAttribute = null } = this.props || {};
+        const {
+            attributes = {},
+            setAttribute = null,
+            selectedAttributes,
+        } = this.props || {};
 
-        if (attributes !== prevProps.attributes) {
+        if (
+            attributes !== prevProps.attributes ||
+            Object.keys(selectedAttributes)?.length === 0
+        ) {
             attributes?.map((set) => {
                 setAttribute && setAttribute(set?.name, set.items[0].value);
             });

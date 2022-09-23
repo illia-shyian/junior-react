@@ -1,5 +1,6 @@
 import { Component } from "react";
 import { connect } from "react-redux";
+import { Link } from "react-router-dom";
 import { getCurrentCurrency, getPrice } from "../../../helpers";
 import { actionCartChange } from "../../../reducers";
 import { Attributes } from "../../Attributes";
@@ -62,15 +63,21 @@ export class CartItem extends Component {
                         {product?.gallery?.length > 1 && displayCarousel ? (
                             <CarouselHorizontal items={1}>
                                 {(product?.gallery || [])?.map((image) => (
-                                    <CarouselItem>
-                                        <img src={image} />
+                                    <CarouselItem key={image}>
+                                        <Link to={`/product/${product?.id}`}>
+                                            <img src={image} />
+                                        </Link>
                                     </CarouselItem>
                                 ))}
                             </CarouselHorizontal>
                         ) : (
-                            <img
-                                src={product?.gallery && product?.gallery[0]}
-                            />
+                            <Link to={`/product/${product?.id}`}>
+                                <img
+                                    src={
+                                        product?.gallery && product?.gallery[0]
+                                    }
+                                />
+                            </Link>
                         )}
                     </div>
                 </div>

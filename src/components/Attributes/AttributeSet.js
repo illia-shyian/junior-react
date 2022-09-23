@@ -12,7 +12,7 @@ class AttributeSet extends Component {
                         {(set?.items || []).map((item) => (
                             <AttributeItem
                                 {...this.props}
-                                key={item?.name}
+                                key={item?.value}
                                 item={item}
                                 type={set?.type}
                                 onSelect={(value) =>

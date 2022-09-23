@@ -12,6 +12,13 @@ class ProductPage extends Component {
         selectedAttributes: {},
     };
 
+    setAttribute = (key, value) =>
+        this.setState((state) => ({
+            selectedAttributes: { ...state.selectedAttributes, [key]: value },
+        }));
+
+    clearSelectedAttributes = () => this.setState({ selectedAttributes: {} });
+
     updateCurrency = () => {
         this.props.currencies?.length &&
             this.setState({ currency: getCurrentCurrency() });
@@ -24,13 +31,14 @@ class ProductPage extends Component {
     componentDidUpdate(prevProps) {
         if (prevProps !== this.props) {
             this.updateCurrency();
+            if (
+                prevProps?.product?.attributes !==
+                this.props?.product.attributes
+            ) {
+                this.clearSelectedAttributes();
+            }
         }
     }
-
-    setAttribute = (key, value) =>
-        this.setState((state) => ({
-            selectedAttributes: { ...state.selectedAttributes, [key]: value },
-        }));
 
     render() {
         const { product = {}, onBuyButtonClick = null } = this.props || {};
