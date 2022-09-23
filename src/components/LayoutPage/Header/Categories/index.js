@@ -1,6 +1,6 @@
 import { Component } from "react";
 import { connect } from "react-redux";
-import { Link } from "react-router-dom";
+import { LinkWithQuery } from "../../../LinkWithQuery";
 
 class Categories extends Component {
     render() {
@@ -9,8 +9,8 @@ class Categories extends Component {
             <div className="Categories">
                 <div className="category-set">
                     {(categories || []).map((cat) => (
-                        <Link
-                            className={`category-item Link ${
+                        <LinkWithQuery
+                            className={`category-item${
                                 cat.name === currCategory?.name
                                     ? "selected"
                                     : ""
@@ -19,7 +19,7 @@ class Categories extends Component {
                             to={`/category/${cat?.name}`}
                         >
                             {cat?.name}
-                        </Link>
+                        </LinkWithQuery>
                     ))}
                 </div>
             </div>

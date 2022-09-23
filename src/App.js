@@ -1,9 +1,10 @@
 import { Provider } from "react-redux";
-import { Router } from "react-router-dom";
+import { Route, Router } from "react-router-dom";
 import "./App.css";
 import { store } from "./reducers";
 import createHistory from "history/createBrowserHistory";
 import { CLayoutPage } from "./components/LayoutPage";
+import { CUpdateCurrencyWithRouter } from "./components/UpdateCurrency";
 
 export const history = createHistory();
 
@@ -12,7 +13,11 @@ function App() {
         <div className="App">
             <Provider store={store}>
                 <Router history={history}>
-                    <CLayoutPage />
+                    <Route path="/*">
+                        <CUpdateCurrencyWithRouter>
+                            <CLayoutPage />
+                        </CUpdateCurrencyWithRouter>
+                    </Route>
                 </Router>
             </Provider>
         </div>

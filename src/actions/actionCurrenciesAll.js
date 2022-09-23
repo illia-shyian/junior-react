@@ -4,7 +4,7 @@ import { actionPromise } from "../reducers/promiseReducer";
 export const actionCurrenciesAll =
     ({ promiseName = "currenciesAll" } = {}) =>
     async (dispatch, getState) => {
-        dispatch(
+        await dispatch(
             actionPromise(
                 promiseName,
                 gql(

@@ -1,5 +1,5 @@
 import { Component } from "react";
-import { CProductCard } from "../../../ProductCard";
+import { CProductCardWithRouter } from "../../../ProductCard";
 
 class ProductList extends Component {
     render() {
@@ -7,7 +7,10 @@ class ProductList extends Component {
         return (
             <div className="ProductList">
                 {(products || []).map((product) => (
-                    <CProductCard product={product} key={product?.id} />
+                    <CProductCardWithRouter
+                        product={product}
+                        key={product?.id}
+                    />
                 ))}
             </div>
         );

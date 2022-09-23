@@ -1,57 +1,54 @@
-import { Component } from "react";
+import React, { Component } from "react";
 import { connect } from "react-redux";
 import { getCurrentCurrency, updateQueryParams } from "../../helpers";
 
 class Currency extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            isOpen: false,
-            currency: null,
-        };
-    }
+    state = {
+        isOpen: false,
+    };
+    currenciesRef = React.createRef();
 
     setIsOpen = (value) =>
         this.setState({
             isOpen: value,
         });
 
-    setCurrencies = (currencies = []) =>
-        this.setState({
-            currencies,
-        });
-
-    updateCurrency = () => {
-        this.props.currencies?.length &&
-            this.setState({ currency: getCurrentCurrency() });
+    checkClickOutsideCurrencies = (e) => {
+        if (
+            this.currenciesRef?.current &&
+            !this.currenciesRef?.current?.contains(e.target)
+        ) {
+            this.setIsOpen(false);
+        }
     };
 
     componentDidMount() {
-        this.updateCurrency();
+        document.addEventListener(
+            "mousedown",
+            this.checkClickOutsideCurrencies
+        );
     }
 
-    componentDidUpdate(prevProps) {
-        if (prevProps !== this.props) {
-            this.updateCurrency();
-        }
+    componentWillUnmount() {
+        document.removeEventListener(
+            "mousedown",
+            this.checkClickOutsideCurrencies
+        );
     }
 
     render() {
         const {
-            props: { currencies } = {},
+            props: { currencies, currency } = {},
             state: { isOpen },
+
             setIsOpen,
         } = this || {};
 
         return (
-            <div className="Currency">
-                <div
-                    className="menu"
-                    onClick={() => setIsOpen(!isOpen)}
-                    onMouseLeave={() => setIsOpen(false)}
-                >
+            <div className="Currency" ref={this.currenciesRef}>
+                <div className="menu" onClick={(e) => setIsOpen(!isOpen)}>
                     <div className="current">
-                        {this.state.currency?.symbol}
+                        {currency?.symbol}
                         <div className="arrow-wrapper">
                             <i className={`arrow ${isOpen ? "active" : ""}`}>
                                 <span></span>
@@ -80,6 +77,7 @@ class Currency extends Component {
 
 export const CCurrency = connect((state) => ({
     currencies: state?.promise?.currenciesAll?.payload || [],
+    currency: state?.currency?.selectedCurrency,
 }))(Currency);
 
 export { Currency };

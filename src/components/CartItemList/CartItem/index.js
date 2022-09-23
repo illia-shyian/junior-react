@@ -1,39 +1,21 @@
 import { Component } from "react";
 import { connect } from "react-redux";
-import { Link } from "react-router-dom";
-import { getCurrentCurrency, getPrice } from "../../../helpers";
+import { getPrice } from "../../../helpers";
 import { actionCartChange } from "../../../reducers";
 import { Attributes } from "../../Attributes";
-import {
-    CarouselHorizontal,
-    CarouselItem,
-    CarouselVertical,
-} from "../../Carousel";
+import { CarouselHorizontal, CarouselItem } from "../../Carousel";
+import { LinkWithQuery } from "../../LinkWithQuery";
 import { Counter } from "./Counter";
 
 export class CartItem extends Component {
-    state = {
-        currency: null,
-    };
-    updateCurrency = () => {
-        this.props.currencies?.length &&
-            this.setState({ currency: getCurrentCurrency() });
-    };
-
-    componentDidMount() {
-        this.updateCurrency();
-    }
-
-    componentDidUpdate(prevProps) {
-        if (prevProps !== this.props) {
-            this.updateCurrency();
-        }
-    }
     render() {
-        const { onCountChange, item: { product = {}, count = 1 } = {} } =
-            this.props || {};
+        const {
+            onCountChange,
+            currency,
+            item: { product = {}, count = 1 } = {},
+        } = this.props || {};
         const displayCarousel = this.props.displayCarousel || false;
-        const price = getPrice(this.state.currency?.label, product);
+        const price = getPrice(currency?.label, product);
 
         return (
             <div className="CartItem">
@@ -41,7 +23,7 @@ export class CartItem extends Component {
                     <div className="product-name">{product?.brand}</div>
                     <div className="product-type">{product?.name}</div>
                     <div className="product-price">
-                        {this.state.currency?.symbol}
+                        {currency?.symbol}
                         {price?.amount}
                     </div>
                     <Attributes
@@ -64,20 +46,22 @@ export class CartItem extends Component {
                             <CarouselHorizontal items={1}>
                                 {(product?.gallery || [])?.map((image) => (
                                     <CarouselItem key={image}>
-                                        <Link to={`/product/${product?.id}`}>
+                                        <LinkWithQuery
+                                            to={`/product/${product?.id}`}
+                                        >
                                             <img src={image} />
-                                        </Link>
+                                        </LinkWithQuery>
                                     </CarouselItem>
                                 ))}
                             </CarouselHorizontal>
                         ) : (
-                            <Link to={`/product/${product?.id}`}>
+                            <LinkWithQuery to={`/product/${product?.id}`}>
                                 <img
                                     src={
                                         product?.gallery && product?.gallery[0]
                                     }
                                 />
-                            </Link>
+                            </LinkWithQuery>
                         )}
                     </div>
                 </div>
@@ -87,7 +71,7 @@ export class CartItem extends Component {
 }
 
 export const CCartitem = connect(
-    (state) => ({ currencies: state?.promise?.currenciesAll?.payload || [] }),
+    (state) => ({ currency: state?.currency?.selectedCurrency }),
     {
         onCountChange: (product, count) => actionCartChange(product, count),
     }

@@ -3,8 +3,8 @@ import { connect } from "react-redux";
 import { Attributes } from "../../Attributes";
 import { Slider } from "../../Slider";
 import parse from "html-react-parser";
-import { actionCartAdd } from "../../../reducers";
-import { getCurrentCurrency } from "../../../helpers";
+import { actionCartAdd, actionPromiseClear } from "../../../reducers";
+import { getCurrentCurrency, getPrice } from "../../../helpers";
 import { Button } from "../../Button";
 
 class ProductPage extends Component {
@@ -19,18 +19,8 @@ class ProductPage extends Component {
 
     clearSelectedAttributes = () => this.setState({ selectedAttributes: {} });
 
-    updateCurrency = () => {
-        this.props.currencies?.length &&
-            this.setState({ currency: getCurrentCurrency() });
-    };
-
-    componentDidMount() {
-        this.updateCurrency();
-    }
-
     componentDidUpdate(prevProps) {
         if (prevProps !== this.props) {
-            this.updateCurrency();
             if (
                 prevProps?.product?.attributes !==
                 this.props?.product.attributes
@@ -40,12 +30,19 @@ class ProductPage extends Component {
         }
     }
 
-    render() {
-        const { product = {}, onBuyButtonClick = null } = this.props || {};
+    componentWillUnmount() {
+        const onUnmount = this.props.onUnmount || null;
+        onUnmount && onUnmount();
+    }
 
-        const price = product?.prices?.find(
-            (price) => price?.currency?.label === this.state.currency?.label
-        );
+    render() {
+        const {
+            product = {},
+            onBuyButtonClick = null,
+            currency,
+        } = this.props || {};
+
+        const price = getPrice(currency?.label, product);
 
         return (
             <div className="ProductPage">
@@ -92,8 +89,12 @@ export const CProductPage = connect(
     (state) => ({
         product: state.promise?.productById?.payload || {},
         currencies: state.promise?.currenciesAll?.payload || null,
+        currency: state?.currency?.selectedCurrency,
     }),
-    { onBuyButtonClick: (product) => actionCartAdd(product, 1) }
+    {
+        onBuyButtonClick: (product) => actionCartAdd(product, 1),
+        onUnmount: () => actionPromiseClear("productById"),
+    }
 )(ProductPage);
 
 export { ProductPage };

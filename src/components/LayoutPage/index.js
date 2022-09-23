@@ -1,6 +1,6 @@
 import { Component } from "react";
 import { connect } from "react-redux";
-import { Redirect, Route, Switch } from "react-router-dom";
+import { Redirect, Route, Switch, withRouter } from "react-router-dom";
 import { actionCategoryByName } from "../../actions/actionCategoryByName";
 import { actionPageStart } from "../../actions/actionPageStart";
 import { actionProductById } from "../../actions/actionProductById";
@@ -8,7 +8,6 @@ import { CCartPage } from "../pages/CartPage";
 import { CCategoryPage } from "../pages/CategoryPage";
 import { CProductPage } from "../pages/ProductPage";
 import { ScrollToTopWithRouter } from "../ScrollToTop";
-import { Test } from "../Test";
 import { CContent } from "./Content";
 import { Header } from "./Header";
 
@@ -18,7 +17,6 @@ class CategoryPageContainer extends Component {
             this.props || {};
         onLoad && onLoad(name);
     };
-
     componentDidMount() {
         this.fetchCategory();
     }
@@ -69,6 +67,7 @@ class LayoutPage extends Component {
         const { onLoad } = this.props;
         onLoad && onLoad();
     }
+
     render() {
         const { categories = [] } = this.props || {};
         return (
@@ -100,7 +99,6 @@ class LayoutPage extends Component {
                             path="/product/:id"
                             component={CProductPageContainer}
                         />
-                        <Route path="/test" component={Test} />
                         <Route path="/cart" component={CCartPage} />
                     </Switch>
                 </CContent>
@@ -111,7 +109,9 @@ class LayoutPage extends Component {
 
 export const CLayoutPage = connect(
     (state) => ({ categories: state?.promise?.categoriesAll?.payload || [] }),
-    { onLoad: actionPageStart }
-)(LayoutPage);
+    {
+        onLoad: actionPageStart,
+    }
+)(withRouter(LayoutPage));
 
 export { LayoutPage };

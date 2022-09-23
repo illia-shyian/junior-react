@@ -23,6 +23,7 @@ import {
     actionCloseContentOverlay,
     actionOpenContentOverlay,
 } from "./overlayReducer";
+import { currencyReducer, actionSetSelectedCurrency } from "./currencyReducer";
 
 export {
     cartReducer,
@@ -41,6 +42,7 @@ export {
     actionPromiseClear,
 };
 export { actionFeedClear, actionFeedAdd, feedReducer };
+export { actionSetSelectedCurrency };
 
 export const store = createStore(
     combineReducers({
@@ -48,6 +50,7 @@ export const store = createStore(
         cart: cartReducer,
         feed: feedReducer,
         overlay: overlayReducer,
+        currency: currencyReducer,
     }),
     applyMiddleware(thunk)
 );

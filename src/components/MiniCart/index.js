@@ -1,12 +1,12 @@
 import { Component } from "react";
 import { connect } from "react-redux";
-import { Link } from "react-router-dom";
 import { getCurrentCurrency, getPrice } from "../../helpers";
 import {
     actionCloseContentOverlay,
     actionOpenContentOverlay,
 } from "../../reducers";
 import { CartItemList } from "../CartItemList";
+import { LinkWithQuery } from "../LinkWithQuery";
 
 export class MiniCart extends Component {
     state = {
@@ -50,13 +50,13 @@ export class MiniCart extends Component {
                     </div>
                 </div>
                 <div className="buttons">
-                    <Link
+                    <LinkWithQuery
                         to="/cart"
-                        className="Link button viewbag"
+                        className="button viewbag"
                         onClick={onClose}
                     >
                         VIEW BAG
-                    </Link>
+                    </LinkWithQuery>
                     <div className="button checkout">CHECK OUT</div>
                 </div>
             </div>

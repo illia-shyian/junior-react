@@ -3,7 +3,6 @@ import { generateCartItemKey } from "../helpers";
 export function cartReducer(state = undefined, { type, product, count = 1 }) {
     if (!state) {
         state = JSON.parse(localStorage?.cart || "{}");
-        console.log(state);
     }
     if (count <= 0) {
         type = "CART_DELETE";
@@ -22,7 +21,6 @@ export function cartReducer(state = undefined, { type, product, count = 1 }) {
         };
     }
     if (type === "CART_CHANGE") {
-        console.log(generateCartItemKey(product));
         return {
             ...state,
             [generateCartItemKey(product)]: {
