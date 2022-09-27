@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { getCurrentCurrency, updateQueryParams } from "../../helpers";
+import { updateQueryParams } from "../../helpers";
+import { Arrow } from "../Arrow";
 
 class Currency extends Component {
     state = {
@@ -50,10 +51,7 @@ class Currency extends Component {
                     <div className="current">
                         {currency?.symbol}
                         <div className="arrow-wrapper">
-                            <i className={`arrow ${isOpen ? "active" : ""}`}>
-                                <span></span>
-                                <span></span>
-                            </i>
+                            <Arrow className={`${isOpen ? "active" : ""}`} />
                         </div>
                     </div>
                     <div className={`dropdown-menu ${isOpen ? "open" : ""}`}>

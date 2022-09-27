@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { ReactComponent as LeftArrow } from "../../images/arrowLeft.svg";
+import { ReactComponent as LeftArrow } from "../../../images/arrowLeft.svg";
 
 export class CarouselHorizontal extends Component {
     state = {

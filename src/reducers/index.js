@@ -17,7 +17,6 @@ import {
     actionCartDelete,
     actionCartClear,
 } from "./cartReducer";
-import { actionFeedClear, actionFeedAdd, feedReducer } from "./feedReducer";
 import {
     overlayReducer,
     actionCloseContentOverlay,
@@ -41,21 +40,17 @@ export {
     actionPromise,
     actionPromiseClear,
 };
-export { actionFeedClear, actionFeedAdd, feedReducer };
 export { actionSetSelectedCurrency };
 
 export const store = createStore(
     combineReducers({
         promise: promiseReducer,
         cart: cartReducer,
-        feed: feedReducer,
         overlay: overlayReducer,
         currency: currencyReducer,
     }),
     applyMiddleware(thunk)
 );
-
-store.subscribe(() => console.log(store.getState()));
 
 store.subscribe(
     () => (localStorage.cart = JSON.stringify(store.getState()?.cart || {}))

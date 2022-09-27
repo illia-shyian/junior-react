@@ -44,7 +44,7 @@ body {
     background: rgba(57, 55, 72, 0.22);
 }
 
-.LayoutPage {
+.Layout {
     padding-bottom: 200px;
 
     margin: 0 auto;
@@ -121,7 +121,7 @@ body {
                         & .CountBadge {
                             color: #fff;
                             position: absolute;
-
+                            user-select: none;
                             text-align: center;
                             width: 20px;
                             height: 20px;
@@ -425,10 +425,10 @@ body {
                             padding-left: 10px;
                             min-width: 70px;
                             user-select: none;
-                            .arrow-wrapper {
+                            & .arrow-wrapper {
                                 padding: 0 5px;
 
-                                & .arrow {
+                                & .Arrow {
                                     width: 0.6em;
                                     height: 0.6em;
                                     display: inline-block;
@@ -907,7 +907,7 @@ body {
                         z-index: 2;
                         cursor: pointer;
 
-                        & .arrow {
+                        & .Arrow {
                             width: 3em;
                             height: 2.8em;
                             display: inline-block;

@@ -4,7 +4,7 @@ import { Attributes } from "../../Attributes";
 import { Slider } from "../../Slider";
 import parse from "html-react-parser";
 import { actionCartAdd, actionPromiseClear } from "../../../reducers";
-import { getCurrentCurrency, getPrice } from "../../../helpers";
+import { getPrice } from "../../../helpers";
 import { Button } from "../../Button";
 
 class ProductPage extends Component {

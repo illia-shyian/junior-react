@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Arrow } from "../../Arrow";
 
 export class CarouselVertical extends Component {
     state = {
@@ -34,14 +35,11 @@ export class CarouselVertical extends Component {
                     {renderedArrow ? (
                         renderedArrow
                     ) : (
-                        <i
-                            className={`arrow up ${
+                        <Arrow
+                            className={`up ${
                                 this.state.activeIndex ? "" : "hide"
                             }`}
-                        >
-                            <span></span>
-                            <span></span>
-                        </i>
+                        />
                     )}
                 </div>
                 <div className="wrapper">
@@ -78,17 +76,14 @@ export class CarouselVertical extends Component {
                     {renderedArrow ? (
                         renderedArrow
                     ) : (
-                        <i
-                            className={`arrow  down ${
+                        <Arrow
+                            className={`down ${
                                 this.state.activeIndex >=
                                 children?.length - items
                                     ? "hide"
                                     : ""
                             }`}
-                        >
-                            <span></span>
-                            <span></span>
-                        </i>
+                        />
                     )}
                 </div>
             </div>

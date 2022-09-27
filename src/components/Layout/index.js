@@ -62,7 +62,7 @@ const CProductPageContainer = connect(null, {
     onLoad: (id) => actionProductById({ id }),
 })(ProductPageContainer);
 
-class LayoutPage extends Component {
+class Layout extends Component {
     componentDidMount() {
         const { onLoad } = this.props;
         onLoad && onLoad();
@@ -71,7 +71,7 @@ class LayoutPage extends Component {
     render() {
         const { categories = [] } = this.props || {};
         return (
-            <div className="LayoutPage">
+            <div className="Layout">
                 <ScrollToTopWithRouter />
                 <Header />
                 <CContent>
@@ -107,11 +107,11 @@ class LayoutPage extends Component {
     }
 }
 
-export const CLayoutPage = connect(
+export const CLayout = connect(
     (state) => ({ categories: state?.promise?.categoriesAll?.payload || [] }),
     {
         onLoad: actionPageStart,
     }
-)(withRouter(LayoutPage));
+)(withRouter(Layout));
 
-export { LayoutPage };
+export { Layout };

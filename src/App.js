@@ -3,7 +3,7 @@ import { Route, Router } from "react-router-dom";
 import "./App.css";
 import { store } from "./reducers";
 import createHistory from "history/createBrowserHistory";
-import { CLayoutPage } from "./components/LayoutPage";
+import { CLayout } from "./components/Layout";
 import { CUpdateCurrencyWithRouter } from "./components/UpdateCurrency";
 
 export const history = createHistory();
@@ -15,7 +15,7 @@ function App() {
                 <Router history={history}>
                     <Route path="/*">
                         <CUpdateCurrencyWithRouter>
-                            <CLayoutPage />
+                            <CLayout />
                         </CUpdateCurrencyWithRouter>
                     </Route>
                 </Router>
