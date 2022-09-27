@@ -45,18 +45,23 @@ body {
 }
 
 .LayoutPage {
+    padding-bottom: 200px;
+
+    margin: 0 auto;
+    position: relative;
+    width: 100%;
     padding-left: 100px;
     padding-right: 100px;
-    padding-bottom: 200px;
 
     & .Header {
         height: 80px;
+
         position: fixed;
+        padding-right: 200px;
         z-index: 3;
         top: 0;
-        width: calc(100% - 200px);
+        width: inherit;
         background: #fff;
-        padding-right: 100px;
         display: flex;
         justify-content: space-between;
 
@@ -109,6 +114,7 @@ body {
                         height: 80px;
                         display: flex;
                         align-items: center;
+
                         padding: 0px 10px;
                         position: relative;
 
@@ -224,7 +230,7 @@ body {
                                                         &.swatch {
                                                             width: 16px;
                                                             height: 16px;
-
+                                                            margin-right: 5px;
                                                             &.selected {
                                                                 border: 1px
                                                                     solid
@@ -283,6 +289,7 @@ body {
                                         }
                                         & > .plus,
                                         & > .minus {
+                                            user-select: none;
                                             cursor: pointer;
                                             height: 24px;
                                             line-height: 24px;
@@ -328,6 +335,7 @@ body {
                                                     bottom: 0px;
                                                     justify-content: right;
                                                     width: 100%;
+                                                    user-select: none;
                                                     & .arrow-wrapper {
                                                         display: flex;
                                                         align-items: center;
@@ -416,6 +424,7 @@ body {
                             display: flex;
                             padding-left: 10px;
                             min-width: 70px;
+                            user-select: none;
                             .arrow-wrapper {
                                 padding: 0 5px;
 
@@ -495,7 +504,7 @@ body {
         & .Logo {
             position: absolute;
             left: 0;
-            right: 0;
+            right: 200px;
             bottom: 0;
             top: 0;
             margin: auto;
@@ -785,6 +794,7 @@ body {
                     position: relative;
                     display: flex;
                     flex-direction: column;
+                    align-items: center;
 
                     & .card-title {
                         font-family: "Raleway";
@@ -792,6 +802,7 @@ body {
                         font-weight: 300;
                         font-size: 18px;
                         margin-top: auto;
+                        width: 100%;
                     }
 
                     & .card-price {
@@ -800,6 +811,7 @@ body {
                         font-weight: 500;
                         line-height: 160%;
                         font-size: 18px;
+                        width: 100%;
                     }
 
                     & .card-img {
@@ -837,12 +849,17 @@ body {
                             height: 52px;
                             width: 52px;
                             position: absolute;
+                            user-select: none;
                             right: 15px;
                             bottom: 26px;
                             display: none;
                             z-index: 2;
                             &:hover {
                                 transform: scale(1.1);
+                            }
+
+                            &:active {
+                                transform: scale(1.05);
                             }
 
                             &.active {
@@ -897,6 +914,7 @@ body {
                             position: relative;
                             margin: auto;
                             margin-left: 23px;
+                            user-select: none;
 
                             & span {
                                 top: 0.4em;
