@@ -40,6 +40,7 @@ export class CartItem extends Component {
                         onMinusClick={() =>
                             onCountChange && onCountChange(product, count - 1)
                         }
+                        miniControls={this.props.miniControls || false}
                     />
                     <div className="product-image">
                         {product?.gallery?.length > 1 && displayCarousel ? (

@@ -2,6 +2,7 @@ import { Component } from "react";
 import { connect } from "react-redux";
 import { Redirect } from "react-router-dom";
 import { getCurrentCurrency, getPrice } from "../../../helpers";
+import { actionCartClear } from "../../../reducers";
 import { Button } from "../../Button";
 import { CartItemList } from "../../CartItemList";
 
@@ -25,7 +26,7 @@ class CartPage extends Component {
     }
 
     render() {
-        const { cart = {}, location = {} } = this.props || {};
+        const { cart = {}, onCartClear = null } = this.props || {};
 
         const total = Object.values(cart).reduce(
             (prev, curr) =>
@@ -43,38 +44,38 @@ class CartPage extends Component {
 
         return Object.values(cart)?.length ? (
             <div className="CartPage">
-                <div className="title">Cart</div>
+                <div className="header">
+                    <div className="title">Cart</div>
+                    <div className="cart-clear" onClick={onCartClear}>
+                        CLEAR CART
+                    </div>
+                </div>
+
                 <CartItemList
                     items={Object.values(cart) || []}
                     displayCarousel={true}
                 />
-                <div className="cost">
-                    <div className="tax">
-                        Tax 21%:{" "}
-                        <span className="value">
-                            <b>
-                                {this.state.currency?.symbol}
-                                {Math.round(tax * 100) / 100}
-                            </b>
-                        </span>
-                    </div>
-                    <div className="quantity">
-                        Quantity :{" "}
-                        <span className="value">
-                            <b>{quantity}</b>
-                        </span>
-                    </div>
-                    <div className="total">
-                        Total :{" "}
-                        <span className="value">
-                            <b>
-                                {this.state.currency?.symbol}
-                                {Math.round(total * 100) / 100}
-                            </b>
-                        </span>
-                    </div>
-                    <Button>ORDER</Button>
-                </div>
+                <table className="cost">
+                    <tr className="tax">
+                        <td>Tax 21%:</td>
+                        <td className="value">
+                            {this.state.currency?.symbol}
+                            {Math.round(tax * 100) / 100}
+                        </td>
+                    </tr>
+                    <tr className="quantity">
+                        <td>Quantity :</td>
+                        <td className="value">{quantity}</td>
+                    </tr>
+                    <tr className="total">
+                        <td>Total : </td>
+                        <td className="value">
+                            {this.state.currency?.symbol}
+                            {Math.round(total * 100) / 100}
+                        </td>
+                    </tr>
+                </table>
+                <Button>ORDER</Button>
             </div>
         ) : (
             <Redirect to="/" />
@@ -82,9 +83,12 @@ class CartPage extends Component {
     }
 }
 
-export const CCartPage = connect((state) => ({
-    cart: state.cart || {},
-    currencies: state?.promise?.currenciesAll?.payload || [],
-}))(CartPage);
+export const CCartPage = connect(
+    (state) => ({
+        cart: state.cart || {},
+        currencies: state?.promise?.currenciesAll?.payload || [],
+    }),
+    { onCartClear: actionCartClear }
+)(CartPage);
 
 export { CartPage };

@@ -4,6 +4,20 @@
     box-sizing: border-box;
 }
 
+@font-face {
+    font-family: "Raleway";
+    src: url("fonts/Raleway-VariableFont_wght.ttf")
+        format("truetype-variations");
+    font-weight: 100 1000;
+}
+
+@font-face {
+    font-family: "Roboto";
+    src: url("fonts/RobotoFlex-VariableFont_GRAD\,XTRA\,YOPQ\,YTAS\,YTDE\,YTFI\,YTLC\,YTUC\,opsz\,slnt\,wdth\,wght.ttf")
+        format("truetype-variations");
+    font-weight: 100 1000;
+}
+
 .Link {
     color: inherit;
     text-decoration: none;
@@ -67,7 +81,7 @@ body {
 
         & .Categories {
             font-weight: 400;
-            font-size: 1.44em;
+            font-size: 16px;
             & .category-set {
                 display: flex;
                 height: 100%;
@@ -75,10 +89,14 @@ body {
 
                 & .category-item {
                     height: 100%;
-                    line-height: 80px;
-                    padding: 0px 16px;
-                    text-transform: uppercase;
+
                     cursor: pointer;
+
+                    & .category-name {
+                        text-transform: uppercase;
+                        line-height: 80px;
+                        padding: 0px 16px;
+                    }
 
                     &:after {
                         display: block;
@@ -86,6 +104,10 @@ body {
                         border-bottom: 2px solid #5ece7b;
                         transform: scaleX(0);
                         transition: transform 150ms ease-in-out;
+                    }
+                    &.selected {
+                        color: #5ece7b;
+                        font-weight: 600;
                     }
                     &:hover:after,
                     &.selected:after {
@@ -146,6 +168,21 @@ body {
                         right: calc(100% - 40px);
                         background: #fff;
                         z-index: 3;
+                        text-transform: none;
+                        line-height: normal;
+
+                        & .header {
+                            padding-bottom: 30px;
+                            font-family: "Raleway";
+                            font-style: normal;
+                            font-weight: 400;
+                            font-size: 16px;
+                            color: #1d1f22;
+
+                            & > b {
+                                font-weight: 700;
+                            }
+                        }
 
                         & .CartItemList {
                             width: 100%;
@@ -200,7 +237,7 @@ body {
                                     & .product-price {
                                         font-family: "Raleway";
                                         font-style: normal;
-                                        font-weight: 700;
+                                        font-weight: 500;
                                         font-size: 16px;
                                         line-height: 160%;
                                         color: #1d1f22;
@@ -220,6 +257,7 @@ body {
                                             & .attribute-item-list {
                                                 display: flex;
                                                 flex-wrap: nowrap;
+                                                align-items: center;
                                                 width: 100%;
 
                                                 & .AttributeItem {
@@ -228,10 +266,14 @@ body {
                                                         cursor: default;
 
                                                         &.swatch {
-                                                            width: 16px;
-                                                            height: 16px;
+                                                            width: 20px;
+                                                            height: 20px;
+                                                            padding: 2px;
+                                                            background-clip: content-box;
                                                             margin-right: 5px;
+
                                                             &.selected {
+                                                                padding: 1px;
                                                                 border: 1px
                                                                     solid
                                                                     #5ece7b;
@@ -418,7 +460,7 @@ body {
                     }
 
                     & .Currency {
-                        font-size: 1.5em;
+                        font-size: 18px;
 
                         & .current {
                             display: flex;
@@ -522,14 +564,33 @@ body {
         }
 
         & .CartPage {
-            & .title {
-                font-family: "Raleway";
-                font-style: normal;
-                font-weight: 700;
-                font-size: 32px;
-                line-height: 40px;
+            & .header {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+
                 padding-bottom: 50px;
+                padding-right: 20px;
+                & .title {
+                    font-size: 32px;
+                    line-height: 32px;
+                    font-family: "Raleway";
+                    font-style: normal;
+                    font-weight: 700;
+                }
+                & .cart-clear {
+                    font-size: 18px;
+                    border: 1px dashed #5edd7b;
+                    padding: 7px;
+                    border-radius: 5px;
+                    cursor: pointer;
+
+                    &:hover {
+                        border: 1px solid #5edd7b;
+                    }
+                }
             }
+
             & .CartItemList {
                 & .CartItem {
                     padding: 25px 0;
@@ -597,6 +658,7 @@ body {
                                 & .attribute-item-list {
                                     display: flex;
                                     flex-wrap: wrap;
+                                    align-items: center;
                                     width: 100%;
 
                                     & .AttributeItem {
@@ -606,10 +668,14 @@ body {
                                             cursor: default;
 
                                             &.swatch {
-                                                width: 32px;
-                                                height: 32px;
+                                                width: 36px;
+                                                height: 36px;
+                                                padding: 2px;
+                                                background-clip: content-box;
+                                                margin-right: 5px;
 
                                                 &.selected {
+                                                    padding: 1px;
                                                     border: 1px solid #5ece7b;
                                                 }
                                             }
@@ -668,8 +734,9 @@ body {
                                 display: flex;
                                 justify-content: center;
                                 cursor: pointer;
-                                height: 24px;
-                                line-height: 24px;
+                                height: 45px;
+                                width: 45px;
+                                line-height: 45px;
                             }
                         }
 
@@ -739,9 +806,16 @@ body {
             }
 
             & .cost {
-                & > div {
-                    margin-top: 8px;
+                & td {
+                    padding: 4px 0px;
+                    &:nth-child(even) {
+                        padding-left: 10px;
+                    }
                 }
+                & .value {
+                    font-weight: 700;
+                }
+
                 & .tax {
                     margin-top: 32px;
                 }
@@ -760,12 +834,12 @@ body {
                     font-size: 24px;
                     line-height: 28px;
                 }
-                & .Button {
-                    margin-top: 20px;
-                    font-size: 14px;
-                    width: 280px;
-                    padding: 13px 0;
-                }
+            }
+            & .Button {
+                margin-top: 20px;
+                font-size: 14px;
+                width: 280px;
+                padding: 13px 0;
             }
         }
 
@@ -1029,12 +1103,12 @@ body {
                     margin-bottom: 20px;
 
                     & .price-value {
-                        padding-top: 10px;
+                        margin-top: 10px;
                         font-family: "Raleway";
                         font-style: normal;
                         font-weight: 700;
                         font-size: 24px;
-                        line-height: 18px;
+                        line-height: 24px;
                     }
                 }
 
@@ -1053,6 +1127,7 @@ body {
                         & .attribute-item-list {
                             display: flex;
                             flex-wrap: wrap;
+                            align-items: center;
                             width: 100%;
 
                             & .AttributeItem {
@@ -1062,10 +1137,14 @@ body {
                                     cursor: pointer;
 
                                     &.swatch {
-                                        width: 32px;
-                                        height: 32px;
+                                        width: 36px;
+                                        height: 36px;
+                                        padding: 2px;
+                                        background-clip: content-box;
+                                        margin-right: 5px;
 
                                         &.selected {
+                                            padding: 1px;
                                             border: 1px solid #5ece7b;
                                         }
                                     }

@@ -38,9 +38,21 @@ export class MiniCart extends Component {
             0
         );
 
+        const count = Object.values(cart)?.reduce(
+            (prev, cartProduct) => prev + cartProduct.count,
+            0
+        );
+
         return isMiniCartOpen ? (
             <div className="MiniCart">
-                <CartItemList {...this.props} items={Object.values(cart)} />
+                <div className="header">
+                    <b>My Bag,</b> {count} {count > 1 ? "items" : "item"}
+                </div>
+                <CartItemList
+                    {...this.props}
+                    items={Object.values(cart)}
+                    miniControls={true}
+                />
 
                 <div className="total">
                     <div className="total-text">Total</div>
