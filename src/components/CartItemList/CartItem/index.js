@@ -5,6 +5,7 @@ import { actionCartChange } from "../../../reducers";
 import { Attributes } from "../../Attributes";
 import { CarouselHorizontal, CarouselItem } from "../../Carousel";
 import { LinkWithQuery } from "../../LinkWithQuery";
+import { Price } from "../../Price";
 import { Counter } from "./Counter";
 
 export class CartItem extends Component {
@@ -23,8 +24,7 @@ export class CartItem extends Component {
                     <div className="product-name">{product?.brand}</div>
                     <div className="product-type">{product?.name}</div>
                     <div className="product-price">
-                        {currency?.symbol}
-                        {price?.amount}
+                        <Price currency={currency} price={price?.amount} />
                     </div>
                     <Attributes
                         selectedAttributes={product?.selectedAttributes || {}}
@@ -50,7 +50,10 @@ export class CartItem extends Component {
                                         <LinkWithQuery
                                             to={`/product/${product?.id}`}
                                         >
-                                            <img src={image} />
+                                            <img
+                                                src={image}
+                                                alt="product gallery"
+                                            />
                                         </LinkWithQuery>
                                     </CarouselItem>
                                 ))}
@@ -61,6 +64,7 @@ export class CartItem extends Component {
                                     src={
                                         product?.gallery && product?.gallery[0]
                                     }
+                                    alt="product gallery"
                                 />
                             </LinkWithQuery>
                         )}

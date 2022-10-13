@@ -4,6 +4,7 @@ import { Link, withRouter } from "react-router-dom";
 import { getPrice } from "../../helpers";
 import { actionCartAdd } from "../../reducers";
 import { CartAddIcon } from "../CartAddIcon";
+import { Price } from "../Price";
 
 export class ProductCard extends Component {
     state = {
@@ -33,7 +34,7 @@ export class ProductCard extends Component {
                 }
             >
                 <div className="card-img">
-                    {<img src={product?.gallery[0]} />}
+                    {<img src={product?.gallery[0]} alt="product gallery" />}
                     {!product?.inStock && (
                         <div className="card-out-of-stock-text">
                             <span>OUT OF STOCK</span>
@@ -55,10 +56,11 @@ export class ProductCard extends Component {
                         )
                     ) : null}
                 </div>
-                <div className="card-title">{product?.name}</div>
+                <div className="card-title">
+                    {product?.brand} {product?.name}
+                </div>
                 <div className="card-price">
-                    {price?.amount}
-                    {currency?.symbol}
+                    <Price currency={currency} price={price?.amount} />
                 </div>
                 {!product?.inStock && (
                     <div className="card-out-of-stock-overlay"></div>

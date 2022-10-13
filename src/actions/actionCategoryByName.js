@@ -11,7 +11,7 @@ export const actionCategoryByName = ({
             `query catByName($name:String!){
                 category(input:{title:$name}){
                   name products{
-                    id name gallery inStock
+                    id name gallery inStock brand
                     attributes{
                       id
                     }

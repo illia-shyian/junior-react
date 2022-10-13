@@ -235,13 +235,15 @@ body {
                                     }
 
                                     & .product-price {
-                                        font-family: "Raleway";
-                                        font-style: normal;
-                                        font-weight: 500;
-                                        font-size: 16px;
-                                        line-height: 160%;
-                                        color: #1d1f22;
-                                        padding-bottom: 8px;
+                                        & .Price {
+                                            font-family: "Raleway";
+                                            font-style: normal;
+                                            font-weight: 500;
+                                            font-size: 16px;
+                                            line-height: 160%;
+                                            color: #1d1f22;
+                                            padding-bottom: 8px;
+                                        }
                                     }
                                     & .Attributes {
                                         & .AttributeSet {
@@ -420,11 +422,13 @@ body {
                                 text-transform: none;
                             }
                             & .total-value {
-                                font-family: "Raleway";
-                                font-style: normal;
-                                font-weight: 700;
-                                font-size: 16px;
-                                line-height: 160%;
+                                & .Price {
+                                    font-family: "Raleway";
+                                    font-style: normal;
+                                    font-weight: 700;
+                                    font-size: 16px;
+                                    line-height: 160%;
+                                }
                             }
                         }
 
@@ -634,14 +638,16 @@ body {
                         }
 
                         & .product-price {
-                            font-family: "Raleway";
-                            font-style: normal;
-                            font-weight: 700;
-                            font-size: 24px;
-                            line-height: 160%;
-                            color: #1d1f22;
-                            padding-bottom: 20px;
-                            margin-top: 20px;
+                            & .Price {
+                                font-family: "Raleway";
+                                font-style: normal;
+                                font-weight: 700;
+                                font-size: 24px;
+                                line-height: 160%;
+                                color: #1d1f22;
+                                padding-bottom: 20px;
+                                margin-top: 20px;
+                            }
                         }
 
                         & .Attributes {
@@ -880,11 +886,14 @@ body {
                     }
 
                     & .card-price {
-                        font-family: "Raleway";
-                        font-style: normal;
-                        font-weight: 500;
-                        line-height: 160%;
-                        font-size: 18px;
+                        & .Price {
+                            display: inline;
+                            font-family: "Raleway";
+                            font-style: normal;
+                            font-weight: 500;
+                            line-height: 160%;
+                            font-size: 18px;
+                        }
                         width: 100%;
                     }
 
@@ -1103,12 +1112,14 @@ body {
                     margin-bottom: 20px;
 
                     & .price-value {
-                        margin-top: 10px;
-                        font-family: "Raleway";
-                        font-style: normal;
-                        font-weight: 700;
-                        font-size: 24px;
-                        line-height: 24px;
+                        & .Price {
+                            margin-top: 10px;
+                            font-family: "Raleway";
+                            font-style: normal;
+                            font-weight: 700;
+                            font-size: 24px;
+                            line-height: 24px;
+                        }
                     }
                 }
 

@@ -31,12 +31,15 @@ export class Slider extends Component {
                             key={image}
                             onClick={() => this.setSelectedImage(image)}
                         >
-                            <img src={image} />
+                            <img src={image} alt="product gallery" />
                         </CarouselItem>
                     ))}
                 </CarouselVertical>
                 <div className="selected-image">
-                    <img src={this.state.selectedImage} />
+                    <img
+                        src={this.state.selectedImage}
+                        alt="product gallery selected"
+                    />
                 </div>
             </div>
         );

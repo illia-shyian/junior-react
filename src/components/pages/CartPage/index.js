@@ -5,6 +5,7 @@ import { getCurrentCurrency, getPrice } from "../../../helpers";
 import { actionCartClear } from "../../../reducers";
 import { Button } from "../../Button";
 import { CartItemList } from "../../CartItemList";
+import { Price } from "../../Price";
 
 class CartPage extends Component {
     state = {
@@ -59,8 +60,7 @@ class CartPage extends Component {
                     <tr className="tax">
                         <td>Tax 21%:</td>
                         <td className="value">
-                            {this.state.currency?.symbol}
-                            {Math.round(tax * 100) / 100}
+                            <Price currency={this.state.currency} price={tax} />
                         </td>
                     </tr>
                     <tr className="quantity">
@@ -70,8 +70,10 @@ class CartPage extends Component {
                     <tr className="total">
                         <td>Total : </td>
                         <td className="value">
-                            {this.state.currency?.symbol}
-                            {Math.round(total * 100) / 100}
+                            <Price
+                                currency={this.state.currency}
+                                price={total}
+                            />
                         </td>
                     </tr>
                 </table>

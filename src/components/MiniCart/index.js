@@ -7,6 +7,7 @@ import {
 } from "../../reducers";
 import { CartItemList } from "../CartItemList";
 import { LinkWithQuery } from "../LinkWithQuery";
+import { Price } from "../Price";
 
 export class MiniCart extends Component {
     state = {
@@ -57,8 +58,7 @@ export class MiniCart extends Component {
                 <div className="total">
                     <div className="total-text">Total</div>
                     <div className="total-value">
-                        {this.state.currency?.symbol}
-                        {Math.round(total * 100) / 100}
+                        <Price currency={this.state.currency} price={total} />
                     </div>
                 </div>
                 <div className="buttons">

@@ -22,7 +22,7 @@ export class Counter extends Component {
                 <div className="count">{count}</div>
 
                 {miniControls ? (
-                    <MinusMini className="plus" onClick={onPlusClick} />
+                    <MinusMini className="minus" onClick={onMinusClick} />
                 ) : (
                     <Minus className="minus" onClick={onMinusClick} />
                 )}

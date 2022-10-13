@@ -3,15 +3,15 @@ import { Link, withRouter } from "react-router-dom";
 
 class LinkWithQuery extends Component {
     render() {
-        //deconstrancted staticContext from props to remove react warning about passing staticContext to dom-element(<a>)
         const {
             children,
             to = "",
             location: { search = "" } = {},
             className = "",
-            staticContext = null,
             ...props
         } = this.props || {};
+
+        delete props["staticContext"];
 
         return (
             <Link

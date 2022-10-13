@@ -6,6 +6,7 @@ import parse from "html-react-parser";
 import { actionCartAdd, actionPromiseClear } from "../../../reducers";
 import { getPrice } from "../../../helpers";
 import { Button } from "../../Button";
+import { Price } from "../../Price";
 
 class ProductPage extends Component {
     state = {
@@ -58,8 +59,10 @@ class ProductPage extends Component {
                     <div className="product-price">
                         Price:
                         <div className="price-value">
-                            {price?.amount}
-                            {price?.currency?.symbol}
+                            <Price
+                                currency={price?.currency}
+                                price={price?.amount}
+                            />
                         </div>
                     </div>
                     {product?.inStock && (
